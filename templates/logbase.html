@@ -87,6 +87,7 @@
 
                 <div class="chatlog__messages">
                     <span class="chatlog__author-name" title="{{ group.author | string | e }}">{{ group.author.name | e }}</span>
+<span class="chatlog__author-id">({{ group.author.id | e }})</span>
                     {% if group.type == 'thread_message' %}
                     {% if group.author.mod %}
                         <span class="mod-tag">Reply</span>
