@@ -45,6 +45,29 @@ def guess_ext(url):
             return ext
     return ".png"
 
+
+@app.get("/avatar/<user_id>")
+async def get_avatar(request, user_id):
+    url = request.args.get("url")
+    ext = guess_ext(url) if url else ".png"
+    cached = AVATAR_DIR / f"{user_id}{ext}"
+
+    if cached.exists():
+        return await response.file(str(cached))
+
+    if not url:
+        raise NotFound
+
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as resp:
+            if resp.status != 200:
+                raise NotFound
+            data = await resp.read()
+
+    cached.write_bytes(data)
+    return await response.file(str(cached))
+
+
 jinja_env = Environment(loader=FileSystemLoader("templates"))
 
 def render_template(name, *args, **kwargs):
