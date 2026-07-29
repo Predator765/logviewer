@@ -607,3 +607,71 @@ a {
 .chatlog__reaction-count {
     color: rgba(255, 255, 255, 0.3);
 }
+
+/* === MOBILE FIXES === */
+@media (max-width: 600px) {
+    .entry {
+        padding: 0 4px;
+        font-size: 80%;
+    }
+
+    .info {
+        margin: 0 2px 10px 2px;
+    }
+
+    .info__guild-icon {
+        max-width: 56px;
+        max-height: 56px;
+    }
+
+    .info__metadata {
+        margin-left: 8px;
+    }
+
+    .chatlog__message-group {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .chatlog__author-avatar-container {
+        width: 32px;
+        height: 32px;
+    }
+
+    .chatlog__author-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .chatlog__messages {
+        margin-left: 10px;
+        min-width: 0;
+    }
+
+    .chatlog__author-name {
+        display: block;
+    }
+
+    .chatlog__author-id {
+        display: block;
+        margin-left: 0;
+    }
+
+    .chatlog__embed {
+        max-width: 100%;
+    }
+
+    .chatlog__embed-content-container {
+        max-width: 100%;
+    }
+
+    .chatlog__embed-thumbnail {
+        max-width: 50px;
+        max-height: 50px;
+        margin-left: 10px;
+    }
+
+    .chatlog__attachment-thumbnail {
+        max-width: 100%;
+    }
+}
