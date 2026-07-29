@@ -2,6 +2,10 @@ __version__ = "1.1.3"
 
 import html
 import os
+from pathlib import Path
+
+import aiohttp
+from dotenv import load_dotenv
 
 from dotenv import load_dotenv
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -31,8 +35,17 @@ if not MONGO_URI:
 app = Sanic(__name__)
 app.static("/static", "./static")
 
-jinja_env = Environment(loader=FileSystemLoader("templates"))
+AVATAR_DIR = Path("static/avatars")
+AVATAR_DIR.mkdir(parents=True, exist_ok=True)
 
+
+def guess_ext(url):
+    for ext in (".png", ".jpg", ".jpeg", ".webp", ".gif"):
+        if ext in url:
+            return ext
+    return ".png"
+
+jinja_env = Environment(loader=FileSystemLoader("templates"))
 
 def render_template(name, *args, **kwargs):
     template = jinja_env.get_template(name + ".html")
